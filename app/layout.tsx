@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Space_Grotesk } from "next/font/google";
-
 import Navbar from "./components/Navbar";
+import { PomodoroProvider } from "./context/PomodoroContext";
+import { SignalProvider } from "./context/SignalContext";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -17,14 +17,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`bg-[#0B0F1A] text-white ${spaceGrotesk.className}`}>
-        <Navbar />
-        {children}
+        <PomodoroProvider>
+          <SignalProvider>
+            <Navbar />
+            {children}
+          </SignalProvider>
+        </PomodoroProvider>
       </body>
     </html>
   );

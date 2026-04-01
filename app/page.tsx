@@ -8,13 +8,6 @@ export default function Home() {
       <div className="w-full max-w-5xl">
         <Quotes />
         <MoonDisplay />
-        {/* <iframe
-          src="https://solarsystem.nasa.gov/gltf_embed/2366/"
-          className="3d-moon-embed
-          "
-          style={{ width: "100%", height: "500px", border: "none" }}
-        ></iframe> */}
-        {/* Pomodoro Timer Section */}
         <Pomodoro />
       </div>
     </main>
