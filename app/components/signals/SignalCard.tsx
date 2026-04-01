@@ -1,4 +1,5 @@
 import { Signal } from "@/app/types/signal";
+import { orange } from "@mui/material/colors";
 
 export default function SignalCard({
   signal,
@@ -11,11 +12,19 @@ export default function SignalCard({
   onDelete: (id: number) => void;
   onEdit: (signal: Signal) => void;
 }) {
+  const priorityColorMap = {
+    low: "text-gray-300",
+    medium: "text-blue-500",
+    high: "text-orange-500",
+  };
+
   return (
-    <div className="bg-(--card-dark) rounded-lg p-4 w-full border border-slate-200 border-white/10 hover:border-(--primary)/50 dark:hover:border-primary/50 transition-all cursor-pointer shadow-md shadow-primary/10 transform hover:-translate-y-0.25 transition-all">
+    <div className="bg-slate-900 rounded-lg p-4 w-full border border-slate-200/50 hover:border-blue-500/50 transition-all cursor-pointer shadow-md shadow-blue-500/10 hover:-translate-y-px">
       {signal.priority && (
         <div className="flex items-start gap-2 mb-3 relative">
-          <span className="px-2 py-1 rounded-md bg-(--primary)/10 text-(--primary) text-xs font-semibold uppercase tracking-wider">
+          <span
+            className={`px-2 py-1 rounded-md bg-slate-800 ${priorityColorMap[signal.priority as keyof typeof priorityColorMap]} text-xs font-semibold uppercase tracking-wider`}
+          >
             {signal.priority.toUpperCase()} PRIORITY
           </span>
           {signal.tag && (

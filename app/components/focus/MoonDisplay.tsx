@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 export default function MoonDisplay() {
   const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
@@ -14,7 +14,7 @@ export default function MoonDisplay() {
           />
         </div>
         {isDesktop && (
-          <div className="absolute w-[120%] h-[120%] border border-slate-200/20 dark:border-white/5 rounded-full animate-spin [animation-duration:60s]">
+          <div className="absolute w-[100%] h-[100%] border border-slate-200/20 dark:border-white/5 rounded-full animate-spin [animation-duration:60s]">
             <div className="absolute top-1/2 -right-1 w-2 h-2 bg-(--primary) rounded-full shadow-[0_0_10px_rgba(60,131,246,0.8)]"></div>
           </div>
         )}
