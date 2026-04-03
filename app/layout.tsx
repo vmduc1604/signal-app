@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Geist } from "next/font/google";
 import Navbar from "./components/Navbar";
 import { PomodoroProvider } from "./context/PomodoroContext";
 import { SignalProvider } from "./context/SignalContext";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -19,7 +22,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className={`bg-[#0B0F1A] text-white ${spaceGrotesk.className}`}>
         <PomodoroProvider>
           <SignalProvider>

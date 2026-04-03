@@ -1,16 +1,18 @@
 import { Signal } from "@/app/types/signal";
-import { orange } from "@mui/material/colors";
+import { SignalDrawer } from "./SignalDrawer";
 
 export default function SignalCard({
   signal,
   onToggle,
   onDelete,
   onEdit,
+  onClickSignal,
 }: {
   signal: Signal;
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
   onEdit: (signal: Signal) => void;
+  onClickSignal: (signal: Signal) => void;
 }) {
   const priorityColorMap = {
     low: "text-gray-300",
@@ -19,7 +21,10 @@ export default function SignalCard({
   };
 
   return (
-    <div className="bg-slate-900 rounded-lg p-4 w-full border border-slate-200/50 hover:border-blue-500/50 transition-all cursor-pointer shadow-md shadow-blue-500/10 hover:-translate-y-px">
+    <div
+      className="bg-slate-900 rounded-lg p-4 w-full border border-slate-200/50 hover:border-blue-500/50 transition-all cursor-pointer shadow-md shadow-blue-500/10 hover:-translate-y-px"
+      onClick={() => onClickSignal(signal)}
+    >
       {signal.priority && (
         <div className="flex items-start gap-2 mb-3 relative">
           <span
@@ -37,19 +42,28 @@ export default function SignalCard({
       <h2 className="text-xl font-semibold mb-2">{signal.title || "N/A"}</h2>
       <p className="text-gray-400 mb-4">{signal.description}</p>
       <button
-        onClick={() => onToggle(signal.id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggle(signal.id);
+        }}
         className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
       >
         {signal.completed ? "Mark Active" : "Mark Completed"}
       </button>
       <button
-        onClick={() => onDelete(signal.id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onDelete(signal.id);
+        }}
         className="ml-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded cursor-pointer"
       >
         X
       </button>
       <button
-        onClick={() => onEdit(signal)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onEdit(signal);
+        }}
         className="ml-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer"
       >
         Edit

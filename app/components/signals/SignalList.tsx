@@ -5,11 +5,13 @@ export default function SignalList({
   onToggle,
   onDelete,
   onEdit,
+  onClickSignal,
 }: {
   signals: Signal[];
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
   onEdit: (signal: Signal) => void;
+  onClickSignal: (signal: Signal) => void;
 }) {
   return (
     <div className="flex flex-col items-center gap-6">
@@ -20,6 +22,7 @@ export default function SignalList({
           onToggle={onToggle}
           onDelete={onDelete}
           onEdit={onEdit}
+          onClickSignal={onClickSignal}
         />
       ))}
     </div>

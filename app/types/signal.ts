@@ -5,6 +5,7 @@ export type Signal = {
   completed: boolean;
   priority?: "low" | "medium" | "high";
   tag?: string;
+  content?: string;
 };
 
 export type SignalForm = {
@@ -12,4 +13,5 @@ export type SignalForm = {
   description?: string;
   priority?: "low" | "medium" | "high";
   tag?: string;
+  content?: string;
 };

@@ -3,6 +3,7 @@ import { useState } from "react";
 import SignalList from "../components/signals/SignalList";
 import SignalCreationModal from "../components/signals/SignalCreationModal";
 import SignalEditModal from "../components/signals/SignalEditModal";
+import { SignalDrawer } from "../components/signals/SignalDrawer";
 import { useSignal } from "../context/SignalContext";
 import { Signal } from "../types/signal";
 import { CircleCheck, Dot } from "lucide-react";
@@ -13,6 +14,7 @@ export default function SignalsPage() {
 
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedSignal, setSelectedSignal] = useState<Signal | null>(null);
 
   const todaySignals = signals.filter((s) => !s.completed);
@@ -21,6 +23,11 @@ export default function SignalsPage() {
   const handleEdit = (signal: Signal) => {
     setSelectedSignal(signal);
     setIsEditModalOpen(true);
+  };
+
+  const handleClick = (signal: Signal) => {
+    setSelectedSignal(signal);
+    setIsDrawerOpen(true);
   };
 
   return (
@@ -60,6 +67,7 @@ export default function SignalsPage() {
                   onToggle={toggleSignal}
                   onDelete={deleteSignal}
                   onEdit={handleEdit}
+                  onClickSignal={handleClick}
                 />
               </div>
               <div className="signals-archived flex-1">
@@ -77,6 +85,7 @@ export default function SignalsPage() {
                   onToggle={toggleSignal}
                   onDelete={deleteSignal}
                   onEdit={handleEdit}
+                  onClickSignal={handleClick}
                 />
               </div>
             </div>
@@ -93,13 +102,18 @@ export default function SignalsPage() {
           }}
         />
       )}
-      {isEditModalOpen && selectedSignal && (
+      {/* {isEditModalOpen && selectedSignal && (
         <SignalEditModal
           signal={selectedSignal}
           onClose={() => setIsEditModalOpen(false)}
           onUpdateSignal={updateSignal}
         />
-      )}
+      )} */}
+      <SignalDrawer
+        signal={selectedSignal}
+        open={!!selectedSignal}
+        onClose={() => setSelectedSignal(null)}
+      />
     </>
   );
 }

@@ -1,6 +1,13 @@
 "use client";
 import { useState } from "react";
 import { SignalForm } from "@/app/types/signal";
+import {
+  PenLine,
+  FileText,
+  ListOrdered,
+  Rocket,
+  ChartColumnStacked,
+} from "lucide-react";
 
 export default function SignalCreationModal({
   onClose,
@@ -49,14 +56,12 @@ export default function SignalCreationModal({
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col gap-2">
-            <label className="text-slate-300 text-sm font-medium flex items-center gap-2">
-              <img
-                src="/signal-3-svgrepo-com.svg"
-                alt="Signal"
-                className="w-6 h-6 opacity-70 hover:opacity-100  transition-opacity"
-              />
-              Signal Name
-            </label>
+            <div className="flex gap-2 items-center">
+              {<PenLine className="w-4 h-4 text-(--primary)" />}
+              <label className="text-slate-300 text-sm font-medium flex items-center gap-2">
+                Signal Name
+              </label>
+            </div>
             <input
               name="title"
               type="text"
@@ -69,9 +74,7 @@ export default function SignalCreationModal({
 
           <div className="flex flex-col gap-2">
             <label className="text-slate-300 text-sm font-medium flex items-center gap-2">
-              <span className="material-symbols-outlined text-xs">
-                description
-              </span>
+              {<FileText className="w-4 h-4 text-(--primary)" />}
               Signal Description
             </label>
             <textarea
@@ -87,10 +90,8 @@ export default function SignalCreationModal({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
               <label className="text-slate-300 text-sm font-medium flex items-center gap-2">
-                <span className="material-symbols-outlined text-xs">
-                  explore
-                </span>
-                Target Sector
+                {<ChartColumnStacked className="w-4 h-4 text-(--primary)" />}
+                Category
               </label>
               <div className="flex flex-wrap gap-2">
                 <select
@@ -108,9 +109,7 @@ export default function SignalCreationModal({
             {/* Priority */}
             <div className="flex flex-col gap-2">
               <label className="text-slate-300 text-sm font-medium flex items-center gap-2">
-                <span className="material-symbols-outlined text-xs">
-                  priority_high
-                </span>
+                {<ListOrdered className="w-4 h-4 text-(--primary)" />}
                 Priority Level
               </label>
               <div className="flex h-10 w-full items-center justify-center rounded-lg bg-slate-900/80 p-1 border border-slate-700">
@@ -157,9 +156,7 @@ export default function SignalCreationModal({
               type="submit"
             >
               <span>LAUNCH SIGNAL</span>
-              <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
-                send
-              </span>
+              <Rocket className="w-5 h-5 text-white group-hover:animate-[pulse_1s_infinite]" />
             </button>
             <button
               className="w-full sm:w-auto px-8 py-4 text-slate-400 hover:text-slate-100 font-medium transition-colors cursor-pointer"
