@@ -1,5 +1,4 @@
 import { Signal } from "@/app/types/signal";
-import { SignalDrawer } from "./SignalDrawer";
 
 export default function SignalCard({
   signal,
@@ -39,7 +38,7 @@ export default function SignalCard({
           )}
         </div>
       )}
-      <h2 className="text-xl font-semibold mb-2">{signal.title || "N/A"}</h2>
+      <h3 className="text-xl font-semibold mb-2">{signal.title || "N/A"}</h3>
       <p className="text-gray-400 mb-4">{signal.description}</p>
       <button
         onClick={(e) => {

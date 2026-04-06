@@ -22,7 +22,7 @@ export default function SignalCreationModal({
     priority: "high",
     tag: "",
   });
-
+  
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -94,20 +94,34 @@ export default function SignalCreationModal({
                 Category
               </label>
               <div className="flex flex-wrap gap-2">
-                <select
+                <input
                   name="tag"
+                  type="text"
+                  placeholder="Enter or select a category"
                   value={formData.tag}
                   onChange={handleChange}
-                  className="w-full bg-slate-900/50 border border-slate-700 focus:border-(--primary) focus:ring-1 focus:ring-(--primary) rounded-full px-4 py-3 text-slate-100 placeholder:text-slate-600 transition-all outline-none"
-                >
-                  <option value="technology">Technology</option>
-                  <option value="health">Health</option>
-                  <option value="study">Study</option>
-                </select>
+                  className="w-full bg-slate-900/50 border border-slate-700 focus:border-(--primary) focus:ring-1 focus:ring-(--primary) rounded-full px-4 py-2 text-slate-100 placeholder:text-slate-600  transition-all outline-none"
+                />
+                {/* {recentTags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {recentTags.map((tag) => (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() =>
+                          setFormData((prev) => ({ ...prev, tag }))
+                        }
+                        className="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-xs hover:bg-slate-600 transition-colors"
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                )} */}
               </div>
             </div>
             {/* Priority */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col space-between gap-2">
               <label className="text-slate-300 text-sm font-medium flex items-center gap-2">
                 {<ListOrdered className="w-4 h-4 text-(--primary)" />}
                 Priority Level

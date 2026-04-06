@@ -13,6 +13,8 @@
     "@emotion/styled": "^11.14.1",
     "@fontsource/space-grotesk": "^5.2.10",
     "@mui/material": "^7.3.9",
+    "@tiptap/react": "^3.22.1",
+    "@tiptap/starter-kit": "^3.22.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.7.0",

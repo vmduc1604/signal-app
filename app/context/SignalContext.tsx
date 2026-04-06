@@ -16,19 +16,6 @@ export const SignalProvider = ({ children }: { children: React.ReactNode }) => {
   const [signals, setSignals] = useState<Signal[]>([]);
   const [hasLoaded, setHasLoaded] = useState(false);
 
-  // Load from localStorage
-  useEffect(() => {
-    const stored = localStorage.getItem("signals");
-    if (stored) setSignals(JSON.parse(stored));
-    setHasLoaded(true);
-  }, []);
-
-  // Persist to localStorage
-  useEffect(() => {
-    if (!hasLoaded) return;
-    localStorage.setItem("signals", JSON.stringify(signals));
-  }, [signals, hasLoaded]);
-
   const toggleSignal = (id: number) => {
     setSignals((prev) => {
       const target = prev.find((s) => s.id === id);
@@ -53,6 +40,19 @@ export const SignalProvider = ({ children }: { children: React.ReactNode }) => {
     const newSignal: Signal = { id: Date.now(), ...data, completed: false };
     setSignals((prev) => [newSignal, ...prev]);
   };
+
+  // Load from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem("signals");
+    if (stored) setSignals(JSON.parse(stored));
+    setHasLoaded(true);
+  }, []);
+
+  // Persist to localStorage
+  useEffect(() => {
+    if (!hasLoaded) return;
+    localStorage.setItem("signals", JSON.stringify(signals));
+  }, [signals, hasLoaded]);
 
   return (
     <SignalContext.Provider

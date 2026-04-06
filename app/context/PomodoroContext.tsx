@@ -33,6 +33,7 @@ export const PomodoroProvider = ({
   });
 
   const [time, setTime] = useState(25 * 60);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState<"session" | "break">("session");
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
@@ -81,7 +82,29 @@ export const PomodoroProvider = ({
     setTime(sessionLength);
     setIsRunning(false);
   };
+  
+  // Load from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem("completedPomodoros");
+    const settings = localStorage.getItem("pomodoroSettings");
+    if (settings) {
+      const parsedSettings = JSON.parse(settings);
+      setPomodoroSettings(parsedSettings);
+      setTime(parsedSettings.sessionLength);
+    }
+    if (stored) setCompletedPomodoros(JSON.parse(stored));
+    setHasLoaded(true);
+  }, []);
 
+  // Persist to localStorage
+  useEffect(() => {
+    if (!hasLoaded) return;
+    localStorage.setItem(
+      "completedPomodoros",
+      JSON.stringify(completedPomodoros),
+    );
+    localStorage.setItem("pomodoroSettings", JSON.stringify(pomodoroSettings));
+  }, [completedPomodoros, hasLoaded, pomodoroSettings]);
   return (
     <PomodoroContext.Provider
       value={{
@@ -103,7 +126,7 @@ export const PomodoroProvider = ({
 };
 
 export const usePomodoro = () => {
-  const ctx = useContext(PomodoroContext);  
+  const ctx = useContext(PomodoroContext);
   if (!ctx) throw new Error("usePomodoro must be used inside PomodoroProvider");
   return ctx;
 };

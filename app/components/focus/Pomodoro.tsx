@@ -22,7 +22,9 @@ export default function Pomodoro() {
 
   return (
     <>
-      <div className="text-6xl font-medium text-center">{formatTime(time)}</div>
+      <div className="timer text-6xl font-medium text-center">
+        {formatTime(time)}
+      </div>
       <p className="text-center text-(--primary) mt-2 flex items-center justify-center gap-2">
         {mode === "session" ? (
           <>

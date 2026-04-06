@@ -7,11 +7,13 @@ import { SignalDrawer } from "../components/signals/SignalDrawer";
 import { useSignal } from "../context/SignalContext";
 import { Signal } from "../types/signal";
 import { CircleCheck, Dot } from "lucide-react";
+import { usePomodoro } from "../context/PomodoroContext";
+import { formatTime } from "../utils/formatTime";
 
 export default function SignalsPage() {
   const { signals, createSignal, deleteSignal, toggleSignal, updateSignal } =
     useSignal();
-
+  const { time } = usePomodoro();
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -32,7 +34,7 @@ export default function SignalsPage() {
 
   return (
     <>
-      <div className="flex-1 p-6 md:p-10 justify-center items-center">
+      <div className="flex-1 p-6 md:p-10 justify-center items-center relative">
         <main className="min-h-screen items-center justify-center">
           <div className="flex flex-col">
             <div className="flex justify-between items-end mb-10">
@@ -56,7 +58,7 @@ export default function SignalsPage() {
                 <div className="signal-today-header flex justify-between items-center mb-4">
                   <div className="flex items-center gap-1">
                     <Dot className="w-4 h-4 text-(--primary) bg-(--primary)/30 rounded-full" />
-                    <h2>Today's Signals</h2>
+                    <h3>Today's Signals</h3>
                   </div>
                   <span className="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-[#223149] text-slate-600 dark:text-slate-400">
                     {todaySignals.length} Active
@@ -74,7 +76,7 @@ export default function SignalsPage() {
                 <div className="signal-archived-header flex justify-between items-center mb-4">
                   <div className="flex gap-1 items-center font-medium">
                     <CircleCheck className="w-4 h-4 text-(--color-emerald-400)" />
-                    <h2>Archived Signals</h2>
+                    <h3>Archived Signals</h3>
                   </div>
                   <span className="text-xs font-medium px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400">
                     {archivedSignals.length} Completed
@@ -91,6 +93,9 @@ export default function SignalsPage() {
             </div>
           </div>
         </main>
+        <div className="time   font-bold text-3xl fixed bottom-4 right-4 text-gray-700">
+          {formatTime(time)}
+        </div>
       </div>
 
       {isCreationModalOpen && (
@@ -111,8 +116,9 @@ export default function SignalsPage() {
       )} */}
       <SignalDrawer
         signal={selectedSignal}
-        open={!!selectedSignal}
-        onClose={() => setSelectedSignal(null)}
+        open={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        updateSignal={updateSignal}
       />
     </>
   );

@@ -8,15 +8,18 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { Signal } from "@/app/types/signal";
+import { SignalEditor } from "./SignalEditor";
 
 export function SignalDrawer({
   signal,
   open,
   onClose,
+  updateSignal,
 }: {
-  signal: Signal;
+  signal: Signal | null;
   open: boolean;
   onClose: () => void;
+  updateSignal: (id: number, data: Partial<Signal>) => void;
 }) {
   const priorityColorMap = {
     low: "text-gray-300",
@@ -25,8 +28,13 @@ export function SignalDrawer({
   };
 
   return (
-    <Drawer direction="right" open={open} onOpenChange={(o) => !o && onClose()}>
-      <DrawerContent className="bg-(--background-semi-dark)">
+    <Drawer
+      direction="right"
+      open={open}
+      onOpenChange={(o) => !o && onClose()}
+      dismissible={true}
+    >
+      <DrawerContent className="bg-(--background-semi-dark) border-slate-700/50 backdrop-blur-lg">
         <DrawerHeader>
           {signal?.priority && (
             <div className="flex items-start gap-2 mb-3 relative">
@@ -48,9 +56,12 @@ export function SignalDrawer({
             {signal?.description}
           </DrawerDescription>
         </DrawerHeader>
-        <div className="no-scrollbar h-full m-2 overflow-y-auto px-4 border-2 border-slate-700 rounded-lg p-4 mt-4">
-          <p>{signal?.content || "No additional content available."}</p>
-        </div>
+        <SignalEditor
+          content={signal?.content || ""}
+          onChange={(newContent) => {
+            updateSignal(signal.id, { content: newContent });
+          }}
+        />
         <DrawerFooter>
           <button>Submit</button>
           <DrawerClose asChild>
