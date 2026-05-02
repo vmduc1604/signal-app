@@ -4,6 +4,7 @@ import { Space_Grotesk, Geist } from "next/font/google";
 import Navbar from "./components/Navbar";
 import { PomodoroProvider } from "./context/PomodoroContext";
 import { SignalProvider } from "./context/SignalContext";
+import AmbientBackground from "./components/ui/AmbientBackground";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -23,11 +24,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className={`bg-[#0B0F1A] text-white ${spaceGrotesk.className}`}>
+      <body className={`bg-[#0B0F1A] text-white ${spaceGrotesk.className} relative min-h-screen flex flex-col`}>
         <PomodoroProvider>
           <SignalProvider>
-            <Navbar />
-            {children}
+            <AmbientBackground />
+            <div className="relative z-10 flex flex-col flex-1">
+              <Navbar />
+              {children}
+            </div>
           </SignalProvider>
         </PomodoroProvider>
       </body>

@@ -31,7 +31,7 @@ export default function PomodoroSettingModal({
     };
   return (
     <>
-      <div className="fixed inset-0 bg-black/50 flex items-center justify-center ">
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-10">
         <div className="relative w-full max-w-xl bg-[rgba(16,23,34,0.8)] backdrop-blur-[12px] border border-[rgba(60,131,246,0.2)] rounded-4xl shadow-2xl overflow-hidden border border-slate-800 dark:border-primary/20 p-6 w-full max-w-md relative shadow-xl">
           <div className=" pb-2">
             <div className="flex items-center gap-3 mb-2">
@@ -109,7 +109,7 @@ export default function PomodoroSettingModal({
                 <span>Update Pomodoro</span>
                 <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
                   send
-                </span> 
+                </span>
               </button>
             </div>
           </form>
