@@ -10,9 +10,11 @@ import {
 } from "lucide-react";
 
 export default function SignalCreationModal({
+  folderId,
   onClose,
   onCreateSignal,
 }: {
+  folderId: number;
   onClose: () => void;
   onCreateSignal: (data: SignalForm) => void;
 }) {
@@ -21,6 +23,7 @@ export default function SignalCreationModal({
     description: "",
     priority: "high",
     tag: "",
+    folderId,
   });
 
   const handleChange = (

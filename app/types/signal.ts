@@ -1,3 +1,8 @@
+export type Folder = {
+  id: number;
+  name: string;
+};
+
 export type Signal = {
   id: number;
   title: string;
@@ -6,6 +11,7 @@ export type Signal = {
   priority?: "low" | "medium" | "high";
   tag?: string;
   content?: string;
+  folderId?: number;
 };
 
 export type SignalForm = {
@@ -14,4 +20,5 @@ export type SignalForm = {
   priority?: "low" | "medium" | "high";
   tag?: string;
   content?: string;
+  folderId?: number;
 };
