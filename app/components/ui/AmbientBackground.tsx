@@ -43,11 +43,7 @@ export default function AmbientBackground() {
         className="absolute inset-0"
         initial={false}
         animate={{
-          background: isDeepFocus
-            ? "radial-gradient(circle at 50% 50%, rgba(60, 131, 246, 0.05) 0%, transparent 70%)"
-            : isBreak
-            ? "radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.05) 0%, transparent 70%)"
-            : "radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%)",
+          background: "radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%)",
           opacity: isRunning ? 1 : 0.5,
         }}
         transition={{ duration: 2 }}

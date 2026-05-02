@@ -17,7 +17,7 @@ const SignalContext = createContext<SignalContextType | null>(null);
 
 export const SignalProvider = ({ children }: { children: React.ReactNode }) => {
   const [signals, setSignals] = useState<Signal[]>([]);
-  const [folders, setFolders] = useState<Folder[]>([{ id: 0, name: "Inbox" }]);
+  const [folders, setFolders] = useState<Folder[]>([{ id: 0, name: "Main" }]);
   const [hasLoaded, setHasLoaded] = useState(false);
 
   const toggleSignal = (id: number) => {
@@ -41,11 +41,11 @@ export const SignalProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const createSignal = (data: SignalForm) => {
-    const newSignal: Signal = { 
-      id: Date.now(), 
-      ...data, 
+    const newSignal: Signal = {
+      id: Date.now(),
+      ...data,
       completed: false,
-      folderId: data.folderId ?? 0 // default to Inbox (0) if none provided
+      folderId: data.folderId ?? 0,
     };
     setSignals((prev) => [newSignal, ...prev]);
   };
@@ -58,27 +58,27 @@ export const SignalProvider = ({ children }: { children: React.ReactNode }) => {
   const deleteFolder = (id: number) => {
     if (id === 0) return; // Cannot delete Inbox
     setFolders((prev) => prev.filter((f) => f.id !== id));
-    // Optionally: delete all signals in that folder, or move them to Inbox.
-    setSignals((prev) => prev.map(s => s.folderId === id ? { ...s, folderId: 0 } : s));
+    setSignals((prev) =>
+      prev.map((s) => (s.folderId === id ? { ...s, folderId: 0 } : s)),
+    );
   };
 
   // Load from localStorage
   useEffect(() => {
     const storedSignals = localStorage.getItem("signals");
     if (storedSignals) {
-      // Migrate old signals that don't have a folderId to Inbox (0)
       const parsed = JSON.parse(storedSignals).map((s: Signal) => ({
         ...s,
-        folderId: s.folderId !== undefined ? s.folderId : 0
+        folderId: s.folderId !== undefined ? s.folderId : 0,
       }));
       setSignals(parsed);
     }
-    
+
     const storedFolders = localStorage.getItem("folders");
     if (storedFolders) {
       setFolders(JSON.parse(storedFolders));
     }
-    
+
     setHasLoaded(true);
   }, []);
 

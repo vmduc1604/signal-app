@@ -61,20 +61,12 @@ export default function MoonDisplay() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Determine glow color and animation parameters based on state
   const isDeepFocus = isRunning && mode === "session";
   const isBreak = isRunning && mode === "break";
 
-  const glowColor = isDeepFocus
-    ? "rgba(60, 131, 246, 0.4)" // Blue
-    : isBreak
-    ? "rgba(251, 191, 36, 0.4)" // Amber
-    : "rgba(255, 255, 255, 0.1)"; // Default idle
-
-  // Determine actual 3D light color
-  const lightColor = isBreak
-    ? "#fbbf24" // Warm Amber
-    : "#ffffff"; // Crisp White (for both idle and deep focus)
+  // Neutral sleek glow instead of color shifting
+  const glowColor = "rgba(255, 255, 255, 0.1)"; 
+  const lightColor = "#ffffff"; 
 
   const glowScale = isRunning ? [1, 1.1, 1] : 1;
   const glowOpacity = isRunning ? [0.6, 1, 0.6] : 0.4;
@@ -129,8 +121,8 @@ export default function MoonDisplay() {
             <motion.div 
               className="absolute top-1/2 -right-1 w-2 h-2 rounded-full shadow-lg"
               animate={{
-                backgroundColor: isDeepFocus ? "#3b82f6" : isBreak ? "#fbbf24" : "#ffffff",
-                boxShadow: `0 0 10px ${isDeepFocus ? "#3b82f6" : isBreak ? "#fbbf24" : "#ffffff"}`
+                backgroundColor: "#ffffff",
+                boxShadow: `0 0 10px #ffffff`
               }}
               transition={{ duration: 2 }}
             />

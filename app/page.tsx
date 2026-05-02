@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center px-6 py-12 relative z-10 overflow-hidden">
-      <motion.div 
+      <motion.div
         className="w-full max-w-5xl flex flex-col items-center"
         variants={containerVariants}
         initial="hidden"
@@ -48,11 +48,11 @@ export default function Home() {
           )}
         </AnimatePresence>
 
-        <motion.div variants={itemVariants} className="w-full">
+        <motion.div variants={itemVariants} className="w-full relative z-10">
           <MoonDisplay />
         </motion.div>
 
-        <motion.div variants={itemVariants} className="w-full relative z-20">
+        <motion.div variants={itemVariants} className="w-full relative z-0">
           <Pomodoro />
         </motion.div>
       </motion.div>
